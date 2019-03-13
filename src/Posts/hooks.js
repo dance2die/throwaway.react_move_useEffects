@@ -1,20 +1,14 @@
 import { useState, useEffect } from "react";
+import { getPosts } from "./repository";
 
 function usePosts() {
   const [posts, setPosts] = useState([]);
 
   useEffect(
     () => {
-      async function getPosts() {
-        const posts = await fetch(
-          `https://jsonplaceholder.typicode.com/posts`
-        ).then(_ => _.json());
-        setPosts(posts);
-      }
-
-      getPosts();
+      getPosts().then(setPosts);
     },
-    [posts]
+    [setPosts]
   );
 
   return posts;

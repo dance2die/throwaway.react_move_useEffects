@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { getUser } from "./repository";
 
 function useUser(userId) {
   const [user, setUser] = useState({
@@ -12,21 +13,10 @@ function useUser(userId) {
     () => {
       let didCancel = false;
 
-      const getUserUrl = () =>
-        `https://jsonplaceholder.typicode.com/users/${userId}`;
+      const setOrCancelUser = user =>
+        didCancel ? console.log(`canceled user!`) : setUser(user);
 
-      async function getUser() {
-        const user = await fetch(getUserUrl()).then(_ => _.json());
-
-        console.log(`didCancel`, didCancel);
-        if (didCancel) {
-          console.log(`canceled user!`);
-        } else {
-          setUser(user);
-        }
-      }
-
-      getUser();
+      getUser(userId).then(setOrCancelUser);
 
       return () => {
         didCancel = true;

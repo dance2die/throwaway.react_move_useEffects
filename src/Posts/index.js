@@ -1,30 +1,35 @@
 import React from "react";
-import PostContext from "./Context";
 import { usePosts } from "./hooks";
 
-function Post({ post }) {
-  const { id, title } = post;
-  const postContext = React.useContext(PostContext);
+function Post({ post, setUserId }) {
+  const { title } = post;
+  const setUserIdCache = React.useCallback(
+    () => {
+      console.log(`post`, post);
+      setUserId(post.id);
+    },
+    [post.id, setUserId]
+  );
 
   return (
-    <li className="post" onClick={e => postContext.onPostSelect(id)}>
+    <li className="post" onClick={setUserIdCache}>
       <h2>{title}</h2>
     </li>
   );
 }
 
-function Posts() {
+function Posts({ setUserId }) {
   const posts = usePosts();
 
-  return (
-    <ol>
-      {posts
+  const postsCache = React.useMemo(
+    () =>
+      posts
         .filter((_, i) => i < 10)
-        .map(post => (
-          <Post key={post.id} post={post} />
-        ))}
-    </ol>
+        .map(post => <Post key={post.id} post={post} setUserId={setUserId} />),
+    [posts, setUserId]
   );
+
+  return <ol>{postsCache}</ol>;
 }
 
 export default Posts;

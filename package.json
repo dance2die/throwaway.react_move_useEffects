@@ -1,7 +1,7 @@
 {
   "name": "moving-functions-inside-useeffects",
   "version": "1.0.0",
-  "description": "https://overreacted.io/a-complete-guide-to-useeffect/#moving-functions-inside-effects",
+  "description": "https://overreacted.io/a-complete-guide-to-useeffect/#moving-functions-inside-effects\n\nAfter forking https://codesandbox.io/s/7jzzxv2q7x",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
