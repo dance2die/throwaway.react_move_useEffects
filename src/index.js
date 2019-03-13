@@ -26,17 +26,27 @@ function User({ userId }) {
 
   React.useEffect(
     () => {
+      let didCancel = false;
+
       const getUserUrl = () =>
         `https://jsonplaceholder.typicode.com/users/${userId}`;
 
       async function getUser() {
         const user = await fetch(getUserUrl()).then(_ => _.json());
 
-        console.log(`user`, user);
-        setUser(user);
+        console.log(`didCancel`, didCancel);
+        if (didCancel) {
+          console.log(`canceled user!`);
+        } else {
+          setUser(user);
+        }
       }
 
       getUser();
+
+      return () => {
+        didCancel = true;
+      };
     },
     [userId]
   );
