@@ -1,0 +1,14 @@
+.container {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: row;
+}
+
+.posts {
+  width: 50%;
+}
+
+.post:hover {
+  background-color: lightpink;
+  cursor: pointer;
+}
