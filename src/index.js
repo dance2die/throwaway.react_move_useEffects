@@ -9,9 +9,6 @@ import "./styles.css";
 function App() {
   const [userId, setUserId] = useState(-1);
 
-  // const setUserIdCache = useCallback(id => setUserId(id), [userId]);
-  // const userIdCache = useMemo(() => userId, [userId]);
-
   return (
     <div className="container">
       <article className="posts">
@@ -26,4 +23,6 @@ function App() {
 }
 
 const rootElement = document.getElementById("root");
+
+const AppCache = React.memo(App);
 ReactDOM.render(<App />, rootElement);

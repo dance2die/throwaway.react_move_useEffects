@@ -22,7 +22,7 @@ function useUser(userId) {
         didCancel = true;
       };
     },
-    [userId]
+    [setUser, userId]
   );
 
   return user;
