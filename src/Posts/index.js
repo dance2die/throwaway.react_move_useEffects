@@ -3,13 +3,10 @@ import { usePosts } from "./hooks";
 
 function Post({ post, setUserId }) {
   const { title } = post;
-  const setUserIdCache = React.useCallback(
-    () => {
-      console.log(`post`, post);
-      setUserId(post.id);
-    },
-    [post.id, setUserId]
-  );
+  const setUserIdCache = React.useCallback(() => setUserId(post.id), [
+    post.id,
+    setUserId
+  ]);
 
   return (
     <li className="post" onClick={setUserIdCache}>
@@ -32,4 +29,4 @@ function Posts({ setUserId }) {
   return <ol>{postsCache}</ol>;
 }
 
-export default Posts;
+export default React.memo(Posts);
